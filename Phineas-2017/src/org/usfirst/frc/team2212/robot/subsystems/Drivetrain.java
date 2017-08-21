@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import org.usfirst.frc.team2212.robot.Robot;
+
 import com.spikes2212.genericsubsystems.drivetrains.HolonomicDrivetrain;
+import com.spikes2212.genericsubsystems.drivetrains.commands.DriveHolonomic;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -50,8 +53,7 @@ public class Drivetrain extends HolonomicDrivetrain {
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-
+		setDefaultCommand(new DriveHolonomic(Robot.drivetrain, Robot.oi::getY, Robot.oi::getX));
 	}
 
 }

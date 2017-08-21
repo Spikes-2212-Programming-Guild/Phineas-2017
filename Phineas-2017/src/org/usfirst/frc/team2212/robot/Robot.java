@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2212.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -9,7 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2212.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2212.robot.subsystems.ExampleSubsystem;
+
+import com.spikes2212.utils.DoubleSpeedcontroller;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +26,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static Drivetrain drivetrain;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -32,6 +37,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		drivetrain = new Drivetrain(new DoubleSpeedcontroller(new VictorSP(0), new VictorSP(1)),
+				new DoubleSpeedcontroller(new VictorSP(2), new VictorSP(3)), new VictorSP(4), new VictorSP(5));
 		oi = new OI();
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
